@@ -1,6 +1,6 @@
 !@@@CORE SWITCH SA TAAS
 config t
-   hostname COREtaas__
+   hostname COREtaas11
    enable secret pass
    service password-encryption
    no logging console
@@ -15,19 +15,19 @@ config t
       exec-timeout 0 0
    Int Vlan 1
      no shutdown
-	 ip add 10._.1.2 255.255.255.0
+	 ip add 10.11.1.2 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10._.10.2 255.255.255.0
+	 ip add 10.11.10.2 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10._.50.2 255.255.255.0
+	 ip add 10.11.50.2 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10._.100.2 255.255.255.0
+	 ip add 10.11.100.2 255.255.255.0
 	 description VOICEVLAN
 
 !!!DAPAT 7 UNDER SCORE ANG NA EDIT MO  ( LINE 34 to 68 PASTE TO COREBABA SWITCH )
@@ -154,7 +154,7 @@ client-identifier 001a.0709.c25b
 !!cisco unified call manager Express command
 !@@@CUCM-M
 config t
-   hostname CUCM-_
+   hostname CUCM-11
    enable secret pass
    service password-encryption
    no logging console
@@ -169,22 +169,22 @@ config t
       exec-timeout 0 0
    Int Fa 0/0
      no shutdown
-	 ip add 10._.100.8 255.255.255.0 
+	 ip add 10.11.100.8 255.255.255.0 
 	 end
    
 !!!CUCM ANALOG PHONES CONFIG
 configure terminal
 dial-peer voice 1 pots
-   destination-pattern _00
+   destination-pattern 1100
    port 0/0/0
 dial-peer voice 2 pots
-   destination-pattern _01
+   destination-pattern 1101
    port 0/0/1
 dial-peer voice 3 pots
-   destination-pattern _02
+   destination-pattern 1102
    port 0/0/2
 dial-peer voice 4 pots
-   destination-pattern _03
+   destination-pattern 1103
    port 0/0/3
 end
 
