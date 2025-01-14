@@ -196,35 +196,35 @@ telephony-service
    no auto-reg-ephone
    max-ephones 5
    max-dn 20
-   ip source-address 10.__.100.8 port 2000
+   ip source-address 10.11.100.8 port 2000
    create cnf-files
 ephone-dn 1
-  number __11
+  number 1111
 ephone-dn 2
-  number __22
+  number 1122
 ephone-dn 3
-  number __33
+  number 1133
 ephone-dn 4
-  number __44
+  number 1110
 ephone-dn 5
-  number __55
+  number 1144
 ephone-dn 6
-  number __66
+  number 1155
 ephone-dn 7
-  number __77
+  number 1166
 ephone-dn 8
-  number __88
+  number 1177
  ephone-dn 9
-   number__90
+   number 1188
 ephone-dn 10
- number __91
+ number 1128
 Ephone 1
-  Mac-address ____.____.____
+  Mac-address ccd8.c1fb.09ff
   type 8945
   button 1:8 2:7 3:6 4:5
   restart
 Ephone 2
-  Mac-address ____.____.____
+  Mac-address ccd8.c1fb.0817
   type 8945
   button 1:4 2:3 3:2 4:1
   restart  
@@ -253,14 +253,14 @@ exit
 
 !OUTGOING CALL FROM CUCM TO OTHER CUCM.
 configure terminal
- dial-peer voice 11 Voip
- destination-pattern 11..
- session target ipv4:10.11.100.8
- codec g711ULAW
- ! dial-peer voice 12 Voip
- ! destination-pattern 12..
- ! session target ipv4:10.12.100.8
+ ! dial-peer voice 11 Voip
+ ! destination-pattern 11..
+ ! session target ipv4:10.11.100.8
  ! codec g711ULAW
+dial-peer voice 12 Voip
+ destination-pattern 12..
+ session target ipv4:10.12.100.8
+ codec g711ULAW
 dial-peer voice 21 Voip
  destination-pattern 21..
  session target ipv4:10.21.100.8
@@ -388,8 +388,8 @@ end
 
 !How to Static Route windows Server:
 cmd
-route  add   10.0.0.0   mask   255.0.0.0    10._.1.4
-route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
+route  add   10.0.0.0   mask   255.0.0.0    10.11.1.4
+route  add  200.0.0.0   mask  255.255.255.0   10.11.1.4
 
 ********************************************
 
@@ -406,12 +406,13 @@ dial-peer voice 69 voip
  codec g711ulaw
  no vad
 !
+
 telephony-service
  moh "flash:/en_bacd_music_on_hold.au"
 !
 application
  service rivanaa flash:app-b-acd-aa-3.0.0.2.tcl
-  paramspace english index 1        
+  paramspace english index 1
   param number-of-hunt-grps 2
   param dial-by-extension-option 8
   param handoff-string rivanaa
