@@ -1,3 +1,9 @@
+Software tools that can use in Network Engineer:
+VMWare Workstation - For virtual packet tracer
+wireshark - socket/packet analyzer
+SecureCRT - use for configure devices
+
+
 !Remove router eigrp
 conf t
 no router eigrp 100
@@ -6,3 +12,13 @@ do sh ip proto
 !Find
 !add do if in config; if not, no need of do
 do sh ip route connected | inc C
+
++++sec+++
+nmap -sP <ip address of the first 3 octate in ip add> 
+
+net use x: /delete
+net use \\10.v.1.10\ip$
+
+net use x: \\10.v.1.10\c$
+
+nmap -v www.ccp.edu.ph
