@@ -1,0 +1,8 @@
+!Remove router eigrp
+conf t
+no router eigrp 100
+do sh ip proto
+
+!Find
+!add do if in config; if not, no need of do
+do sh ip route connected | inc C
