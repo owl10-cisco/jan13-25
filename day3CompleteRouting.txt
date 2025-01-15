@@ -105,11 +105,13 @@ Pano mag static Route sa PC:
 cmd
 route  add 10.m.0.0 mask 255.255.0.0 10.m.1.4 -p
 
-How to Create Default Route Cisco/PC/EndDevices:
+How to Create Default Route Cisco/PC/EndDevices: LOAD BALANCE/FLOATING STATIC
 p1:
 config T
 ip route 0.0.0.0  0.0.0.0 10.2.1.1 1
 ip route 0.0.0.0  0.0.0.0 10.2.1.2 2
+ip route 192.168.1.130 255.255.255.255 10.2.1.2
+! ^ Longest Prefix Rule = preferred; to remove extra: <sh run | inc route> identify xtra then 
 !floating Static Routes
 do sh ip route static
 
