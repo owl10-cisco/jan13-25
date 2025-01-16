@@ -46,6 +46,9 @@ Secure Your Network begins at YOU
 Security Even and Incident Management (SEIM) 
   | Able to record any ip connection
 
+Extension for terraform:
+  .hcl {hashicorp configuration language}
+
 
 BLDG 2
 sudo su
