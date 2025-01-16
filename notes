@@ -45,3 +45,9 @@ Secure Your Network begins at YOU
 
 Security Even and Incident Management (SEIM) 
   | Able to record any ip connection
+
+
+BLDG 2
+sudo su
+ifconfig eth0 192.168.103.24 netmask 255.255.255.0 up
+route add default gw 192.168.103.11 
