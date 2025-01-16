@@ -637,10 +637,17 @@ sudo su
 ifconfig eth0 10.20.20.100 netmask 255.255.255.0 up
 route add default gw 10.20.20.12
 ping 10.20.20.12
+
 @r2-fwvPN:
 CONFIG T
 int gi 3
- ip add 10.20.20.12 255.255.255.0
+ ip add 10.10.10.1 255.255.255.0
+end
+
+@r2-fwvPN:
+CONFIG T
+int gi 3
+ ip add 10.20.20.1 255.255.255.0
 end
 
 TASK10: DO YOU HAVE TO REPLACED BY A.I AT WORK? REPLACED BY
