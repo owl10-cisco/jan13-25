@@ -150,10 +150,6 @@ Int gi 1
  ip access-group 69 in
 end
 Goberno: allow all Porn, for freedom of expression!
-config t
-Int gi 1
- NO ip access-group 69 in
-end
 
 Task1.2: block admu.edu.ph, dlsu.edu.ph, ccp.edu.ph, ue.edu.ph
 
@@ -182,21 +178,19 @@ Int Gi 1
 end
 
 YOUR COMPANY IS HAS VERY LOW INTERNET SPEED, BEC OF TORRENTS:
-www.thepiratebay.org
-www.limetorrents.com
-www.freeanimeonline.com
-www.torlock2.com
-www.hentaisites.com
-www.iptorrents.com
+www.thepiratebay.org      104.21.48.1
+www.limetorrents.com      172.67.203.31
+www.freeanimeonline.com   13.248.169.48
+www.torlock2.com          104.21.112.1
+www.hentaisites.com       172.67.173.147
+www.iptorrents.com        104.21.80.1
 
 config t
 NO ip access-list standard NOTORS
 ip access-list standard NOTORS
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
+DENY   104.21.0.0   0.0.255.255
+DENY   172.67.0.0   0.0.255.255
+DENY   13.248.0.0   0.0.255.255
 Permit Any
 Int Gi 1
  ip access-group NOTORS in
@@ -331,15 +325,15 @@ ip http secure-server
 !Make Ping EASY
 ip host www.web310.com 192.168.103.10
 ip host www.web311.com 192.168.103.11
-ip host pc 10.m.1.10
-ip host cm 10.m.100.8
-ip host cm2 10.m.100.9
-ip host p1 10.m.100.101
-ip host p2 10.m.100.102
-ip host c6 10.m.50.6
-ip host c8 10.m.50.8
-ip host sw 10.m.1.4
-ip host ed 10.m.m.1
+ip host pc 10.11.1.10
+ip host cm 10.11.100.8
+ip host cm2 10.11.100.9
+ip host p1 10.11.100.101
+ip host p2 10.11.100.102
+ip host c6 10.11.50.6
+ip host c8 10.11.50.8
+ip host sw 10.11.1.4
+ip host ed 10.11.11.1
 
 TASK7: Enter the World of BlueTeam: Protect vs Redteam: Attack, 
 BlueTeam: UTM: unified Threat management:
@@ -360,10 +354,11 @@ www.web311.com open only dns, https, ssh       ==> 6 lines:
   GOLDEN  FIREWALL FORMULA:  paloalto,fortinet,cisco,checkpoint.
    protocol         hacker    victim       port
 tcp,udp,icmp,IP     Any      web310/11
+
 Config t
 service timestamps log datetime
 service timestamps debug datetime
-logging 10.m.1.10
+logging 10.11.1.10
 logging trap 5
 NO IP access-list Extended FWP1
 IP access-list Extended FWP1
@@ -388,39 +383,47 @@ www.web310.com open only ssh,dns, http
 www.web311.com open only telnet, ssh, https, ping/icmp => 7lines
   GOLDEN  FIREWALL FORMULA:  paloalto,fortinet,cisco,checkpoint.
    protocol         hacker    victim       port
+! data = tcp
+! voip = udp
+! ping = icmp
+! all traffic = ip
 config t
 NO IP access-list Extended FWP2
 IP access-list Extended FWP2
- Permit tcp Any host www.web310.com eq __ log
- Permit tcp Any host www.web310.com eq __ log
- Permit tcp Any host www.web310.com eq __ log
- Permit tcp Any host www.web311.com eq __ log
- Permit tcp Any host www.web311.com eq __ log
- Permit tcp Any host www.web311.com eq __ log 
- Permit ___  Any host www.web311.com log
+ Permit tcp Any host www.web310.com eq 22 log
+ Permit tcp Any host www.web310.com eq 53 log
+ Permit tcp Any host www.web310.com eq 80 log
+ Permit tcp Any host www.web311.com eq 23 log
+ Permit tcp Any host www.web311.com eq 22 log
+ Permit tcp Any host www.web311.com eq 443 log 
+ Permit icmp  Any host www.web311.com log
  Int Gi 3
   ip access-group FWP2 in
 REMOVE FIREWALL:
 CONfig t
  Int Gi 3
-  ip access-group FWP2 in
+  NO ip access-group FWP2 in
 end
 
 ex.3: you are the admin for SUPERPRANING pogo sites:
-www.web310.com open only 443
-www.web311.com open only ping
+www.web310.com open only HTTPS, domain
+www.web311.com open only ping, ssh
 config t
 NO IP access-list Extended PRANING3
 IP access-list Extended PRANING3
- Permit tcp Any host www.web310.com eq __ log
- Permit ___  Any host www.web311.com log
+ Permit tcp Any host www.web310.com eq 443 log
+ Permit tcp Any host www.web310.com eq 53 log
+ Permit tcp Any host www.web311.com eq 22 log
+ Permit icmp  Any host www.web311.com log
 Int Gi 3
   ip access-group PRANING3 in
+ end
 
 CYBERSECURITY TASK7: PROTECTING YOUR CORPORATE WEB APPS.
 EX.1 CREATE A FIREWALL POLICY NAMED Policy1 TO OPEN
 WWW.WEB8.COM HAS HTTP AND HTTPS AS OPEN
 WWW.WEB9.COM HAS SSH AND DNS OPEN
+
 formula:       PROTOCOL    HACKER    VICTIM     PORT:
 config t
 no ip access-list extended Policy1
@@ -433,9 +436,9 @@ Interface Gi 3
  ip access-group Policy1 in
  do sh ip access-list Policy1
 
-EX.2 CREATE A FIREWALL POLICY NAMED PROWEBAPP2 TO OPEN
-WWW.WEB8.COM HAS HTTPS,PING AS OPEN
-WWW.WEB9.COM HAS HTTPS,PING OPEN
+EX.2 CREATE A FIREWALL POLICY NAMED PROWEBAPP2 TO ALLOW: like cia.gov
+WWW.WEB310.COM HAS HTTPS, HTTP, PING AS OPEN
+WWW.WEB311.COM HAS HTTPS,PING OPEN
 formula:       PROTOCOL      HACKER      VICTIM       PORT:
        tcp, udp, icmp, IP    any       web8,web9
 Ports: 
@@ -531,14 +534,18 @@ config t
 ntp server 216.239.35.8
 end
 show ntp associations
-GIVE IP ADDRESS TO LINUX BLDGONE AND BLDGTWO:
+GIVE IP ADDRESS TO LINUX BLDGTWO AND BLDGTHREE:
 sudo su
-bldg1:
-ifconfig eth0 192.168.103.11 netmask 255.255.255.0 up
-route add default gw 192.168.103.8
+
 bldg2:
-ifconfig eth0 192.168.103.12 netmask 255.255.255.0 up
-route add default gw 192.168.103.8
+sudo su
+ifconfig eth0 192.168.103.22 netmask 255.255.255.0 up
+route add default gw 192.168.103.11
+
+bldg3:
+sudo su
+ifconfig eth0 192.168.103.23 netmask 255.255.255.0 up
+route add default gw 192.168.103.11
 ping 8.8.8.8   1.1.1.1  4.2.2.2  8.8.4.4
 
 TASK9: NAT: NETWORK ADDRESS TRANSLATION SERVICE:
@@ -571,11 +578,13 @@ ip nat INSIDE
 int gi 3
 ip nat INSIDE
 no access-list 8
-access-list 8 permit 10.10.10.0 0.0.0.255
+access-list 8 permit 192.168.102.0 0.0.0.255
 access-list 8 permit 192.168.103.0 0.0.0.255
 ip nat inside source list 8 interface Gi 1 overload
-ip nat inside source static 10.10.10.100 208.8.8.69
-ip nat inside source static 192.168.103.100 208.8.8.88
+ip nat inside source static 192.168.102.22 208.8.8.69
+ip nat inside source static 192.168.103.23 208.8.8.88
+ip nat inside source static 192.168.103.24 208.8.8.101
+ip nat inside source static 192.168.103.25 208.8.8.111
 end
 FW-VPN-PH#show ip nat translations 
 Pro  Inside global         Inside local          Outside local         Outside global
