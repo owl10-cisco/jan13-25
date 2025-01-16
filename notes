@@ -22,3 +22,26 @@ net use \\10.v.1.10\ip$
 net use x: \\10.v.1.10\c$
 
 nmap -v www.ccp.edu.ph
+
+!Type in VPNPH (Management Port in EDGE CISCO)
+conf t
+no logging console
+int gi 2
+no shut 
+ip add 192.168.102.11 255.255.255.0
+end
+wr
+
+!Type in VPNJP (Management Port in EDGE CISCO)
+conf t
+no logging console
+int gi 2
+no shut 
+ip add 192.168.102.12 255.255.255.0
+end
+wr
+
+Secure Your Network begins at YOU
+
+Security Even and Incident Management (SEIM) 
+  | Able to record any ip connection
