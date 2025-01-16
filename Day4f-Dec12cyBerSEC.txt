@@ -1,6 +1,30 @@
 DNS IPv4: verizon.com.ph
 DNS IPv6: epldt.com.ph
 
+Cybersecurity Job Interview Questions
+What is Confidentiality Integrity Availability (CIA)?
+ Confidentiality   - Data is encrypted: Using MD5, Digital Encryption Standard (DES), AES128. AE256, RSA 
+ Integrity         - Data is not altered: Using hash-like SHA1, SHA2 & SHA256
+ Availability      - Data is protected through backup
+
+Confidentiality Demo:
+@COREBABA
+config t
+ username admin privilege 15 secret pass
+ username om privilege 15 secret C1sc0123
+ username anon privilege 15 secret pass
+ line vty 0 14
+ login local
+ end
+
+!Encrypt Cisco traffic using SSH
+@COREBABA
+config t
+ ip domain-name cisco.com
+ crypto key generate rsa 
+ ! -> ? 1024 : modulus 1024
+ ip ssh version 2
+
 TASK1: Cisco Security Fundamentals.
 cmd
 ping 10.k.1.10
@@ -37,23 +61,56 @@ OF CISCO ACCESS-LIST TO BLOCK ALL THE PORNSITES INT WORLD.
 FROM ENTERING YOUR NETWORK. 
 step1: give Unlimited internet to EDGE:
 @edge
+
+@PHL
 CONFIG T
 no logging console
 Int Gi 2
 no shut
 ip add 192.168.102.11 255.255.255.0
+
+@JPN
+CONFIG T
+no logging console
+Int Gi 2
+no shut
+ip add 192.168.102.12 255.255.255.0
+
+@VPNPH & VPNPH
+conf t
+ line vty 0 14
+  exec-timeout 0 0
+  end
+
 @telnet use secureCRT: telnet 192.168.108.5
-in SEcureCRT, Paste This:
+in SEcureCRT, Paste This (in PH):
 config t
 IP ROUTE 0.0.0.0  0.0.0.0 208.8.8.2
 ip name-server 8.8.8.8 1.1.1.1
 ip domain-lookup
+! ^ gives you internet and allows ping to website
 int gi 1
 no shut
 ip add 208.8.8.11 255.255.255.0
 int gi 3
 no shut
 ip add 192.168.103.11 255.255.255.0
+end
+sh ip int br
+
+!(in JP)
+config t
+IP ROUTE 0.0.0.0  0.0.0.0 208.8.8.2
+ip name-server 8.8.8.8 1.1.1.1
+ip domain-lookup
+int gi 1
+no shut
+ip add 208.8.8.12 255.255.255.0
+int gi 3
+no shut
+ip add 192.168.103.12 255.255.255.0
+end
+sh ip int br
 
 
 ALL THE PORN SITES THE WORLD ARE OWNED BY 5 COMPANIES:
@@ -100,23 +157,30 @@ end
 
 Task1.2: block admu.edu.ph, dlsu.edu.ph, ccp.edu.ph, ue.edu.ph
 
-ping www.dlsu.edu.ph 172.67.14.0   104.22.36.0
+ping www.dlsu.edu.ph 172.67.14.0   104.22.0.0
 ping www.ccp.edu.ph 50.6.160.0     
 ping www.feu.edu.ph 184.168.125.0  
 ping  www.ue.edu.ph 155.137.92.0  
-ping  www.yourschool.edu.ph = _________
+ping  www.pup.edu.ph = 115.146.213.0
 config t
 NO ip access-list standard NOISKUL
 ip access-list standard NOISKUL
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
-DENY   __.__.__.__   0.0.255.255
+DENY   104.22.0.0   0.0.255.255
+DENY   50.6.0.0   0.0.255.255
+DENY   184.168.0.0   0.0.255.255
+DENY   155.137.0.0   0.0.255.255
+DENY   115.146.0.0   0.0.255.255
 Permit Any
 Int Gi 1
  ip access-group NOISKUL in
 end
+
+!to remove blocked lists
+conf t
+Int Gi 1
+ no ip access-group NOISKUL in
+end
+
 YOUR COMPANY IS HAS VERY LOW INTERNET SPEED, BEC OF TORRENTS:
 www.thepiratebay.org
 www.limetorrents.com
