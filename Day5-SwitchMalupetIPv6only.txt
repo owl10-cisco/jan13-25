@@ -306,6 +306,9 @@ wireshark = bridge priority is 32768 = very Hackable!
 " bobo/inutil ang Network Engineer nyo sa company!"
 Protect the Most Important SWitch in your 
 Office: RootBridge = TAAS, 2ndRootBridge = BABA:
+32768 = BOBO, tanga, GAGO nakaupo dyan.
+24576 = Qualified, certified, skilled, big dick energy ang nakaupo
+28672 = Super drug addict/bangag
 TAAS:/d1       32786 --> 24576
 Config t
 spanning-tree mode pvst
@@ -363,10 +366,10 @@ end
 #sh int status err-disabled 
 TAAS: bounce/UP/down, bring BACK TO LIFE.
 config t
-int fa 0/3
+int fa 0/1
  shut
  no shut
-int fa 0/7
+int fa 0/5
  shut
  no shut
 end
@@ -490,7 +493,7 @@ config t
 hostname PLDT-ITO
 Track 1 Int gi 0/1 line-protocol
 Int vlan 1
-standby 1 ip 10.__.1.6
+standby 1 ip 10.11.1.6
 standby 1 preempt
 standby 1 Priority 150
 standby 1 Track 1 decrement 60
@@ -508,7 +511,7 @@ COREBABA/GLOBE:
 config t
 hostname GLOBE-ITO
 Int vlan 1
-standby 1 ip 10.__.1.6
+standby 1 ip 10.11.1.6
 standby 1 preempt
 standby 1 Priority 100
 end
