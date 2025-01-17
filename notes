@@ -218,3 +218,41 @@ Answer:
     ipv6 add cafe:face:fafa:faa0::a/59
   end
   sh ipv6 int br
+
+
+Trunking multiple vlans
+@D1 
+  conf t
+    int range e0/0-3, e1/2-3
+    switchport trunk encapsulation dot1q
+    switchport mode trunk
+  end
+
+@D2
+  conf t
+    int range e0/0-3, e1/2-3
+    switchport trunk encapsulation dot1q
+    switchport mode trunk
+  end
+@A1
+  conf t
+    int range e0/0-3, e1/0
+    switchport trunk encapsulation dot1q
+    switchport mode trunk
+  end
+
+@A2
+  conf t
+    int range e0/0-3, e1/0
+    switchport trunk encapsulation dot1q
+    switchport mode trunk
+  end
+
+
+
+
+  int range e0/0-3, e1/2-3  
+
+
+cinf t
+spanning-tree
